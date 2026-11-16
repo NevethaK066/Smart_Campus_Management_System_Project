@@ -1,0 +1,83 @@
+﻿
+==========================================================================================
+ QUERY 1: Student Registrations with Event & Attendance Details (Multi-Table JOIN)
+==========================================================================================
+Student ID   Student Name      Department           Event ID   Event Title                Status     Certificate 
+-----------------------------------------------------------------------------------------------------------
+25AD010      Deepak Raja       Artificial Intelli   EVT101     National Level Hackathon   Present    Issued      
+25AD010      Deepak Raja       Artificial Intelli   EVT102     Hands-on AI & Deep Learn   Present    Issued      
+25AD010      Deepak Raja       Artificial Intelli   EVT104     TECHFEST 2026 - State Le   Present    Issued      
+25AD032      Nivetha S         Artificial Intelli   EVT101     National Level Hackathon   Present    Issued      
+25AD032      Nivetha S         Artificial Intelli   EVT102     Hands-on AI & Deep Learn   Present    Issued      
+25AD032      Nivetha S         Artificial Intelli   EVT106     VCET Cultural Fiesta - T   Present    Issued      
+25AD045      Sneha Lakshmi     Artificial Intelli   EVT102     Hands-on AI & Deep Learn   Present    Issued      
+25CE009      Pooja Devi        Civil Engineering    EVT104     TECHFEST 2026 - State Le   Absent     Not Eligible
+25CE009      Pooja Devi        Civil Engineering    EVT106     VCET Cultural Fiesta - T   Present    Issued      
+25CS012      Bala Murugan      Computer Science &   EVT101     National Level Hackathon   Absent     Not Eligible
+
+==========================================================================================
+ QUERY 2: Event Summary (Aggregations, GROUP BY, Attendance Rate %)
+==========================================================================================
+Event ID   Event Name                     Category               Capacity   Reg    Att    Att %   
+--------------------------------------------------------------------------------------------
+EVT104     TECHFEST 2026 - State Level    Technical Symposium    100        12     10     83.3%   
+EVT101     National Level Hackathon 202   Hackathon              60         10     8      80.0%   
+EVT102     Hands-on AI & Deep Learning    Workshop               40         8      7      87.5%   
+EVT106     VCET Cultural Fiesta - Taran   Cultural Fest          150        8      7      87.5%   
+EVT103     Cloud DevOps & Microservices   Seminar                50         6      5      83.3%   
+EVT105     IoT & Embedded Robotics Boot   Workshop               35         6      5      83.3%   
+EVT107     Full-Stack Web Development H   Hackathon              50         0      0      0.0%    
+EVT108     Next-Gen Cybersecurity & Eth   Workshop               45         0      0      0.0%    
+
+==========================================================================================
+ QUERY 3: Department-wise Participation Statistics
+==========================================================================================
+Department                       Active Students    Registrations    Attended  
+----------------------------------------------------------------------------
+Information Technology           7                  20               20        
+Computer Science & Engg          4                  10               6         
+Artificial Intelligence & DS     3                  7                7         
+Electronics & Comm Engg          3                  7                6         
+Civil Engineering                1                  2                1         
+Electrical & Electronics Engg    1                  2                1         
+Mechanical Engineering           1                  2                1         
+
+==========================================================================================
+ QUERY 4: Subquery - Students with Above-Average Event Registrations
+==========================================================================================
+Student ID   Student Name         Department                     Participations 
+-----------------------------------------------------------------------------
+25CS045      Harini V             Computer Science & Engg        4              
+25EC015      Ananya G             Electronics & Comm Engg        4              
+25IT001      Aarav Sharma         Information Technology         4              
+25IT006      Dinesh Kumar         Information Technology         4              
+25IT036      Kavya S              Information Technology         4              
+25AD010      Deepak Raja          Artificial Intelligence & DS   3              
+25AD032      Nivetha S            Artificial Intelligence & DS   3              
+25CS012      Bala Murugan         Computer Science & Engg        3              
+25CS089      Siddharth M          Computer Science & Engg        3              
+25IT066      Manojkumar P         Information Technology         3              
+25IT096      Swetha R             Information Technology         3              
+
+==========================================================================================
+ QUERY 5: Window Function - Campus Event Leaderboard (DENSE_RANK)
+==========================================================================================
+Rank   Student ID   Student Name         Department                   Registered   Attended  
+----------------------------------------------------------------------------------------
+1      25CS045      Harini V             Computer Science & Engg      4            2         
+1      25EC015      Ananya G             Electronics & Comm Engg      4            3         
+1      25IT001      Aarav Sharma         Information Technology       4            4         
+1      25IT006      Dinesh Kumar         Information Technology       4            4         
+1      25IT036      Kavya S              Information Technology       4            4         
+2      25AD010      Deepak Raja          Artificial Intelligence & DS 3            3         
+
+==========================================================================================
+ TEST CASE: Duplicate Registration Prevention (Functional Requirement 3)
+==========================================================================================
+Attempting duplicate registration: student_id='25IT001' into event_id='EVT101'...
+[PASS] Integrity Constraint Blocked Duplicate Registration Successfully!
+       Database Error Message: UNIQUE constraint failed: registrations.student_id, registrations.event_id
+
+==========================================================================================
+ DBMS Execution Completed Successfully.
+==========================================================================================

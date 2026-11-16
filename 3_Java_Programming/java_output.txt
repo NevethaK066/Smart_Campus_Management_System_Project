@@ -1,0 +1,68 @@
+PS C:\Smart-Campus-Event-Manager-Project\3_Java_Programming> javac -cp "lib/*" -d bin src/com/vcet/events/**/*.java
+PS C:\Smart-Campus-Event-Manager-Project\3_Java_Programming> java -cp "bin;lib/*" com.vcet.events.test.TestCaseRunner
+==========================================================================================
+ VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY, ERODE - 12
+ DEPARTMENT OF INFORMATION TECHNOLOGY | CLASS: 25IT3A&B | AY: 2026-27 (ODD)
+ PROJECT-BASED ASSESSMENT: JAVA TEST CASE EXECUTION SUITE
+ Scenario 6: Smart Campus Event Management & Student Participation Analysis
+==========================================================================================
+
+[TEST 1] Testing Student Registration & Persistence (FR1)
+  Input: ID='25IT101', Name='Rohan Kumar', Dept='Information Technology', Year=3
+  Actual  : Student record already exists in database (Verified idempotency).
+  Status  : [PASS]
+
+[TEST 2] Testing Event Creation and Capacity Definition (FR2)
+  Input: EventID='EVT109', Name='Quantum Computing Webinar', Cap=50, Venue='Online - MS Teams'
+  Actual  : Event already exists in database (Verified idempotency).
+  Status  : [PASS]
+
+[TEST 3] Testing Valid Student Event Registration (FR3)
+  Input: StudentID='25IT101', EventID='EVT107'
+  Actual  : Already enrolled from prior run. Registration recognized.
+  Status  : [PASS]
+
+[TEST 4] Testing Duplicate Registration Prevention (FR3)
+  Input: StudentID='25IT001' registering AGAIN for EventID='EVT101'
+  Expected: DuplicateRegistrationException must be thrown; duplicate blocked!
+  Actual  : Intercepted DuplicateRegistrationException -> Duplicate Registration Rejected: Student '25IT001' is already registered for Event 'EVT101'!
+  Status  : [PASS] - Duplicate Registration Successfully Prevented!
+
+[TEST 5] Testing Attendance Logging & E-Certificate Trigger (FR4)
+  Input: RegistrationID=#1, Status='Present', Remarks='Active Contributor - Winner'
+  Expected: Attendance recorded as 'Present' and Certificate marked 'Issued'
+  Actual  : Database attendance logged successfully with timestamp and certificate eligibility.
+  Status  : [PASS]
+
+[TEST 6] Testing Event-wise Participant Report & Summary Metrics (FR5)
+  Input: EventID='EVT101' (National Level Hackathon 2026)
+
+========================================================================================
+ EVENT REPORT: [EVT101] NATIONAL LEVEL HACKATHON 2026
+========================================================================================
+ Category: Hackathon            | Date: 2026-08-14   | Venue: Main Auditorium
+ Max Capacity: 60               | Total Registered: 10       | Attendance Rate: 80.0%
+ Status Summary: Present: 8 | Absent: 2 | Unrecorded: 0
+----------------------------------------------------------------------------------------
+ Reg ID | Student ID | Student Name         | Department                 | Attendance
+----------------------------------------------------------------------------------------
+ #1     | 25IT001    | Aarav Sharma         | Information Technology     | Present   
+ #2     | 25IT006    | Dinesh Kumar         | Information Technology     | Present   
+ #3     | 25IT036    | Kavya S              | Information Technology     | Present   
+ #4     | 25IT066    | Manojkumar P         | Information Technology     | Present   
+ #5     | 25IT096    | Swetha R             | Information Technology     | Present   
+ #6     | 25CS012    | Bala Murugan         | Computer Science & Engg    | Absent    
+ #7     | 25CS045    | Harini V             | Computer Science & Engg    | Present   
+ #8     | 25AD010    | Deepak Raja          | Artificial Intelligence & DS | Present   
+ #9     | 25AD032    | Nivetha S            | Artificial Intelligence & DS | Present   
+ #10    | 25EC015    | Ananya G             | Electronics & Comm Engg    | Absent    
+========================================================================================
+
+  Expected: Complete participant roster with total registered, attendance rate %, and status breakdown
+  Actual  : Event report rendered accurately above using Java Streams API.
+  Status  : [PASS]
+
+==========================================================================================
+ TEST EXECUTION SUMMARY: 6 / 6 Tests Passed (100.0% Success Rate)
+ ALL 5 FUNCTIONAL REQUIREMENTS VALIDATED SUCCESSFULLY!
+==========================================================================================
